@@ -1,12 +1,12 @@
 template-jsf
 ============
 
-IDE: Eclipse Luna
+IDE | : Eclipse Luna
 
-Database: PostgreeSQL
+Database | : PostgreeSQL
 
-ORM: Hibernate
+ORM | : Hibernate
 
-DI: Spring
+DI | : Spring
 
-MVC: JSF 2.0
+MVC | : JSF 2.0
