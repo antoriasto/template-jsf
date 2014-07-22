@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:util="http://www.springframework.org/schema/util"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans
+		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+		http://www.springframework.org/schema/util 
+		http://www.springframework.org/schema/util/spring-util-3.0.xsd">
+
+	<bean id="truckAllDataPdfReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="classpath:truckAllReport.jrxml" p:reportDataKey="dataSource" />
+
+	<bean id="truckAllDataXlsReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsXlsView"
+		p:url="classpath:truckAllReport.jrxml" p:reportDataKey="dataSource" />
+	
+	<bean id="truckAllDataHtmlReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsHtmlView"
+          p:url="classpath:truckAllReport.jrxml"
+          p:reportDataKey="dataSource" />
+ 
+    <bean id="truckAllDataCsvReport"
+          class="org.springframework.web.servlet.view.jasperreports.JasperReportsCsvView"
+          p:url="classpath:truckAllReport.jrxml"
+          p:reportDataKey="dataSource"/>
+	
+    <!-- SubReport Demo 
+    	
+    	* truck-template
+    	  - sub report route
+    
+    -->
+    <bean id="truckRouteTemplatePdfReport"
+		class="org.springframework.web.servlet.view.jasperreports.JasperReportsPdfView"
+		p:url="classpath:truck-route-template.jrxml" 
+		p:reportDataKey="dataSource" 
+		p:subReportUrls-ref="customSubReportUrls"
+		p:subReportDataKeys-ref="customSubReportDatasource"/>
+    
+    <util:map id="customSubReportUrls">
+	    <!-- This entry key must be declared exactly as you declared it in the master JRXML file -->
+	    <entry key="JasperCustomSubReportLocation" value="classpath:truck-route-template_subreport-route.jrxml"/>
+	</util:map>
+	
+	<util:list id="customSubReportDatasource">
+	    <!-- This value must be declared exactly as you declared it in the master JRXML file -->
+	    <value>JasperCustomSubReportDatasource</value>
+	</util:list>
+    
+    
+</beans>

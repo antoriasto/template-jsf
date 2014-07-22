@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<faces-config version="2.2" xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-facesconfig_2_2.xsd">
+
+	<application>
+		<el-resolver>org.springframework.web.jsf.el.SpringBeanFacesELResolver</el-resolver>
+		<!-- <locale-config> <default-locale>en</default-locale> </locale-config> 
+			<resource-bundle> <base-name>messages</base-name> <var>msg</var> </resource-bundle> -->
+	</application>
+	<!-- <managed-bean> <managed-bean-name>indexController</managed-bean-name> 
+		<managed-bean-class>id.fai.jsf.blog.controller.IndexController</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> </managed-bean> <managed-bean> 
+		<managed-bean-name>newPageController</managed-bean-name> <managed-bean-class>id.fai.jsf.blog.controller.NewPageController</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> </managed-bean> <managed-bean> 
+		<managed-bean-name>postController</managed-bean-name> <managed-bean-class>id.fai.jsf.blog.controller.PostController</managed-bean-class> 
+		<managed-bean-scope>view</managed-bean-scope> </managed-bean> <managed-bean> 
+		<managed-bean-name>newPostController</managed-bean-name> <managed-bean-class>id.fai.jsf.blog.controller.NewPostController</managed-bean-class> 
+		<managed-bean-scope>request</managed-bean-scope> </managed-bean> <managed-bean> 
+		<managed-bean-name>sessionBean</managed-bean-name> <managed-bean-class>id.fai.jsf.blog.util.SessionBean</managed-bean-class> 
+		<managed-bean-scope>session</managed-bean-scope> </managed-bean> -->
+
+	<navigation-rule>
+		<from-view-id>/newpost.xhtml</from-view-id>
+		<navigation-case>
+			<from-action>#{newPostController.save}</from-action>
+			<from-outcome>success</from-outcome>
+			<to-view-id>/index.xhtml</to-view-id>
+		</navigation-case>
+		<navigation-case>
+			<from-action>#{newPostController.save}</from-action>
+			<from-outcome>error</from-outcome>
+			<to-view-id>/newpage.xhtml</to-view-id>
+		</navigation-case>
+	</navigation-rule>
+</faces-config> 
