@@ -1,5 +1,7 @@
 package inc.john.template.jsf.dao.impl;
 
+import java.util.List;
+
 import org.springframework.stereotype.Repository;
 
 import inc.john.template.jsf.dao.EmployeeDao;
@@ -21,6 +23,11 @@ public class EmployeeDaoImpl extends BaseDaoHibernate<Employee> implements Emplo
 	@Override
 	public Employee findById(Long id) {
 		return findByIdBase(id);
+	}
+
+	@Override
+	public List<Employee> findAllData() {
+		return findAllDataBase();
 	}
 
 }

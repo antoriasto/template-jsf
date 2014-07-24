@@ -11,5 +11,42 @@
 <body>
 	<h:inputText value="#{employeeController.employee.name}"></h:inputText>
 	<h:inputText value="#{employeeController.employee2.name}"></h:inputText>
+
+	<h:dataTable value="#{employeeController.listEmployees}" var="o"
+		styleClass="order-table" headerClass="order-table-header"
+		rowClasses="order-table-odd-row,order-table-even-row">
+
+		<h:column>
+			<!-- column header -->
+			<f:facet name="header">ID</f:facet>
+			<!-- row record -->
+    				#{o.id}
+    			</h:column>
+
+		<h:column>
+			<f:facet name="header">Nama</f:facet>
+    				#{o.name}
+    			</h:column>
+
+	</h:dataTable>
+
+	<h2>Add New Employee</h2>
+	<h:form>
+
+		<h:panelGrid columns="3">
+ 
+				Name : 
+				<h:inputText id="name" value="#{employeeController.employee.name}" size="20"
+				required="true" label="Name">
+			</h:inputText>
+
+			<h:message for="name" style="color:red" />
+ 
+		</h:panelGrid>
+
+		<h:commandButton value="Submit" action="#{employeeController.save()}" />
+
+	</h:form>
+
 </body>
 </html>

@@ -1,5 +1,7 @@
 package inc.john.template.jsf.service.impl;
 
+import java.util.List;
+
 import inc.john.template.jsf.dao.EmployeeDao;
 import inc.john.template.jsf.model.Employee;
 import inc.john.template.jsf.service.EmployeeService;
@@ -31,6 +33,11 @@ public class EmployeeServiceImpl implements EmployeeService {
 	@Override
 	public Employee findById(Long id) throws Exception {
 		return employeeDao.findById(id);
+	}
+
+	@Override
+	public List<Employee> findAllData() throws Exception {
+		return employeeDao.findAllData();
 	}
 	
 }
