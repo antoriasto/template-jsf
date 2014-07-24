@@ -101,4 +101,7 @@
         <beans:property name="order" value="0"/>
     </beans:bean> -->
 	
+	<!-- <bean id="sessionFactory"
+     <property name="packagesToScan" value="com.GestionEtudiant.model" /> -->
+	
 </beans>

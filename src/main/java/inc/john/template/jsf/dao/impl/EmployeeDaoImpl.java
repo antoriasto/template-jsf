@@ -19,8 +19,8 @@ public class EmployeeDaoImpl extends BaseDaoHibernate<Employee> implements Emplo
 	}
 
 	@Override
-	public Employee findById(Employee employee) {
-		return findByIdBase(employee.getId());
+	public Employee findById(Long id) {
+		return findByIdBase(id);
 	}
 
 }

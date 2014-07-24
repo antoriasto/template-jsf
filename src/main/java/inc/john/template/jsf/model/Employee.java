@@ -22,7 +22,9 @@ public class Employee implements Serializable {
 	@Column(name="NAMA", nullable=false)
 	private String name;
 
-	
+	public Employee() {
+		super();
+	}
 	
 	public Employee(Long id, String name) {
 		super();
