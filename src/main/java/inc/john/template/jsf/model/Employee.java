@@ -22,6 +22,14 @@ public class Employee implements Serializable {
 	@Column(name="NAMA", nullable=false)
 	private String name;
 
+	
+	
+	public Employee(Long id, String name) {
+		super();
+		this.id = id;
+		this.name = name;
+	}
+
 	public Long getId() {
 		return id;
 	}
