@@ -4,6 +4,9 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.context.FacesContext;
+import javax.faces.event.AjaxBehaviorEvent;
+
 import inc.john.template.jsf.model.Employee;
 import inc.john.template.jsf.service.EmployeeService;
 
@@ -30,6 +33,15 @@ public class EmployeeController implements Serializable {
 			e.printStackTrace();
 		}
 		return "";
+	}
+	
+	/*
+	 * Ajax Modal Popup
+	 * 
+	 */
+	public final void handleEvent(final AjaxBehaviorEvent event) {
+		FacesContext context = FacesContext.getCurrentInstance();
+		this.employee = context.getApplication().evaluateExpressionGet(context, "#{_employee}", Employee.class);
 	}
 	
 	public Employee getEmployee() {

@@ -9,44 +9,124 @@
 <title>Not present in rendered output</title>
 </head>
 <body>
-	<h:inputText value="#{employeeController.employee.name}"></h:inputText>
-	<h:inputText value="#{employeeController.employee2.name}"></h:inputText>
+	<ui:composition template="/WEB-INF/template/mainLayout.xhtml">
+		<ui:define name="content">
+			<!-- 		<f:metadata>
+			<f:viewParam name="firstIndex" value="#{indexController.firstIndex}"></f:viewParam>
+		</f:metadata>
+		<h:form>
+			<h:dataTable footerClass="" headerClass="table-header" value="#{indexController.posts}" var="post" width="100%">
+				<h:column>
+					<div class="row">
+						<div class="page-header">
+							<h2><h:commandLink action="#{indexController.goToPost}" value="#{post.title}">
+								<f:setPropertyActionListener target="#{indexController.postId}" value="#{post.id}"></f:setPropertyActionListener>
+							</h:commandLink></h2>
+						</div>
+						<p><h:outputText value="#{post.post}"></h:outputText></p>
+					</div>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{indexController.goToPrev}" value="Newest" styleClass="btn btn-primary pull-left"></h:commandButton><h:commandButton value="Oldest" styleClass="btn btn-primary pull-right" action="#{indexController.goToNext}"></h:commandButton>
+			
+		</h:form> -->
 
-	<h:dataTable value="#{employeeController.listEmployees}" var="o"
-		styleClass="order-table" headerClass="order-table-header"
-		rowClasses="order-table-odd-row,order-table-even-row">
+			<h:inputText value="#{employeeController.employee.name}"></h:inputText>
+			<h:inputText value="#{employeeController.employee2.name}"></h:inputText>
 
-		<h:column>
-			<!-- column header -->
-			<f:facet name="header">ID</f:facet>
-			<!-- row record -->
-    				#{o.id}
-    			</h:column>
+			<h:dataTable value="#{employeeController.listEmployees}" var="o"
+				footerClass="" headerClass="table-header"
+				styleClass="table table-striped table-bordered">
 
-		<h:column>
-			<f:facet name="header">Nama</f:facet>
+				<h:column>
+					<!-- column header -->
+
+
+
+					<f:facet name="header">ID</f:facet>
+
+					<!-- row record -->
+						#{o.id}
+	
+
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nama</f:facet>
     				#{o.name}
     			</h:column>
 
-	</h:dataTable>
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink value="Edit">
+						the listener sets the variable in backing bean and onevent opens the modal
+						you also have to render the form inside the modal, so the values get updated with new ones from backing bean
+						<f:ajax listener="#{employeeController.handleEvent}"
+							onevent="openModal('myModal');" render=":modalForm" />
+					</h:commandLink>
 
-	<h2>Add New Employee</h2>
-	<h:form>
+				</h:column>
 
-		<h:panelGrid columns="3">
+
+
+
+			</h:dataTable>
+
+			<h2>Add New Employee</h2>
+			<h:form>
+
+				<h:panelGrid columns="3">
  
 				Name : 
-				<h:inputText id="name" value="#{employeeController.employee.name}" size="20"
-				required="true" label="Name">
-			</h:inputText>
+				<h:inputText id="name" value="#{employeeController.employee.name}"
+						size="20" required="true" label="Name">
+					</h:inputText>
 
-			<h:message for="name" style="color:red" />
- 
-		</h:panelGrid>
+					<h:message for="name" style="color:red" />
 
-		<h:commandButton value="Submit" action="#{employeeController.save()}" />
+				</h:panelGrid>
 
-	</h:form>
+				<h:commandButton value="Submit"
+					action="#{employeeController.save()}" />
+
+			</h:form>
+
+
+
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+
+				<div class="modal-header">
+					<button type="button" class="close" data-dismiss="modal"
+						aria-hidden="true">×</button>
+					<h3 id="myModalLabel">Modal header</h3>
+				</div>
+				<div class="modal-body">
+					<p>
+						Use backing Bean property here...
+						<h:outputText value="#{employeeController.employee.name}" />
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+					<button class="btn btn-primary">Save changes</button>
+				</div>
+
+			</div>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+
+	<script type="text/javascript">
+    function openModal(modalName) {
+       $(modalName).modal('show');
+       return false;
+    }
+</script>
+
 
 </body>
 </html>
