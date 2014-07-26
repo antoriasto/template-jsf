@@ -1,0 +1,92 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:composite="http://java.sun.com/jsf/composite"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+<head>
+<title>Not present in rendered output</title>
+</head>
+<body>
+	<ui:composition template="/WEB-INF/template/mainLayout.xhtml">
+		<ui:define name="content">
+			<!-- 		<f:metadata>
+			<f:viewParam name="firstIndex" value="#{indexController.firstIndex}"></f:viewParam>
+		</f:metadata>
+		<h:form>
+			<h:dataTable footerClass="" headerClass="table-header" value="#{indexController.posts}" var="post" width="100%">
+				<h:column>
+					<div class="row">
+						<div class="page-header">
+							<h2><h:commandLink action="#{indexController.goToPost}" value="#{post.title}">
+								<f:setPropertyActionListener target="#{indexController.postId}" value="#{post.id}"></f:setPropertyActionListener>
+							</h:commandLink></h2>
+						</div>
+						<p><h:outputText value="#{post.post}"></h:outputText></p>
+					</div>
+				</h:column>
+			</h:dataTable>
+			<h:commandButton action="#{indexController.goToPrev}" value="Newest" styleClass="btn btn-primary pull-left"></h:commandButton><h:commandButton value="Oldest" styleClass="btn btn-primary pull-right" action="#{indexController.goToNext}"></h:commandButton>
+			
+		</h:form> -->
+<h:form>
+			<h:dataTable value="#{employeeController.listEmployees}" var="emp"
+				footerClass="" headerClass="table-header"
+				styleClass="table table-striped table-bordered">
+
+				<h:column>
+					<!-- column header -->
+					<f:facet name="header">ID</f:facet>
+						#{emp.id}
+				</h:column>
+
+				<h:column>
+					<f:facet name="header">Nama</f:facet>
+    				#{emp.name}
+    			</h:column>
+
+				<h:column>
+					<f:facet name="header">Action</f:facet>
+					<h:commandLink action="#{employeeController.goToPost}" value="Edit">
+								<f:setPropertyActionListener target="#{employeeController.employeeBeanPopUp.id}" value="#{emp.id}"></f:setPropertyActionListener>
+							</h:commandLink>
+				</h:column>
+			</h:dataTable>
+</h:form>
+			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+				aria-labelledby="myModalLabel" aria-hidden="true">
+				<h:form id="modalForm">
+
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Modal header</h3>
+					</div>
+					<div class="modal-body">
+						<p>
+							Use backing Bean property here...
+							<h:outputText value="#{employeeController.employeeBeanPopUp.name}" />
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						<button class="btn btn-primary">Save changes</button>
+					</div>
+				</h:form>
+			</div>
+
+
+
+		</ui:define>
+	</ui:composition>
+
+
+	<script type="text/javascript">
+    function openModal(modalName) {
+       $(modalName).modal('show');
+       return false;
+    }
+</script>
+</body>
+</html>

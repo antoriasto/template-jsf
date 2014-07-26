@@ -4,6 +4,7 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.faces.bean.ManagedBean;
 import javax.faces.context.FacesContext;
 import javax.faces.event.AjaxBehaviorEvent;
 
@@ -24,6 +25,8 @@ public class EmployeeController implements Serializable {
 	private Employee employee2 = new Employee();
 	private List<Employee> listEmployees = new ArrayList<Employee>();
 	
+	private Employee employeeBeanPopUp;
+	
 	public String save() {
 		try {
 			Employee emp = new Employee();
@@ -41,7 +44,20 @@ public class EmployeeController implements Serializable {
 	 */
 	public final void handleEvent(final AjaxBehaviorEvent event) {
 		FacesContext context = FacesContext.getCurrentInstance();
-		this.employee = context.getApplication().evaluateExpressionGet(context, "#{_employee}", Employee.class);
+		this.employeeBeanPopUp = context.getApplication().evaluateExpressionGet(context, "#{_o}", Employee.class);
+		System.out.println(employeeBeanPopUp.getName());
+	}
+	
+	/*
+	 * 
+	 * 
+	 */
+	public Employee getSelection(Employee e) {
+		return e;
+	}
+	
+	public String goToPost(){
+		return "post.xhtml?faces-redirect=true&id="+employeeBeanPopUp.getId();
 	}
 	
 	public Employee getEmployee() {
@@ -90,5 +106,13 @@ public class EmployeeController implements Serializable {
 
 	public void setListEmployees(List<Employee> listEmployees) {
 		this.listEmployees = listEmployees;
+	}
+
+	public Employee getEmployeeBeanPopUp() {
+		return employeeBeanPopUp;
+	}
+
+	public void setEmployeeBeanPopUp(Employee employeeBeanPopUp) {
+		this.employeeBeanPopUp = employeeBeanPopUp;
 	}
 }

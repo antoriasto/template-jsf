@@ -8,7 +8,7 @@
 <head>
 <title>Not present in rendered output</title>
 </head>
-<body>
+<h:body>
 	<ui:composition template="/WEB-INF/template/mainLayout.xhtml">
 		<ui:define name="content">
 			<!-- 		<f:metadata>
@@ -33,44 +33,33 @@
 
 			<h:inputText value="#{employeeController.employee.name}"></h:inputText>
 			<h:inputText value="#{employeeController.employee2.name}"></h:inputText>
-
-			<h:dataTable value="#{employeeController.listEmployees}" var="o"
+<h:form>
+			<h:dataTable value="#{employeeController.listEmployees}" var="_o"
 				footerClass="" headerClass="table-header"
 				styleClass="table table-striped table-bordered">
 
 				<h:column>
 					<!-- column header -->
-
-
-
 					<f:facet name="header">ID</f:facet>
-
-					<!-- row record -->
-						#{o.id}
-	
-
+						#{_o.id}
 				</h:column>
 
 				<h:column>
 					<f:facet name="header">Nama</f:facet>
-    				#{o.name}
+    				#{_o.name}
     			</h:column>
 
 				<h:column>
 					<f:facet name="header">Action</f:facet>
-					<h:commandLink value="Edit">
-						the listener sets the variable in backing bean and onevent opens the modal
-						you also have to render the form inside the modal, so the values get updated with new ones from backing bean
-						<f:ajax listener="#{employeeController.handleEvent}"
-							onevent="openModal('myModal');" render=":modalForm" />
-					</h:commandLink>
-
+					 <h:commandLink value="Edit">
+           <!-- the listener sets the variable in backing bean and onevent opens the modal -->
+           <!-- you also have to render the form inside the modal, so the values get updated with new ones from backing bean -->
+           <f:ajax listener="#{employeeController.handleEvent}" onevent="openModal('myModal');" render=":modalForm"/>
+       </h:commandLink>
 				</h:column>
-
-
-
-
 			</h:dataTable>
+</h:form>
+<a href="#myModal" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 
 			<h2>Add New Employee</h2>
 			<h:form>
@@ -92,41 +81,72 @@
 			</h:form>
 
 
-
-			<div id="myModal" class="modal hide fade" tabindex="-1" role="dialog"
+<!-- <div id="myModal" class="modal fade" tabindex="-1" role="dialog"
 				aria-labelledby="myModalLabel" aria-hidden="true">
+				<h:form id="modalForm">
 
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"
+							aria-hidden="true">×</button>
+						<h3 id="myModalLabel">Modal header</h3>
+					</div>
+					<div class="modal-body">
+						<p>
+							Use backing Bean property here...
+							<h:outputText value="#{employeeController.employeeBeanPopUp.name}" />
+						</p>
+					</div>
+					<div class="modal-footer">
+						<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
+						<button class="btn btn-primary">Save changes</button>
+					</div>
+				</h:form>
+			</div> -->
+
+<!-- Modal -->
+	<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+	<h:form id="modalForm">
+		<div class="modal-dialog">
+			<div class="modal-content">
 				<div class="modal-header">
 					<button type="button" class="close" data-dismiss="modal"
-						aria-hidden="true">×</button>
-					<h3 id="myModalLabel">Modal header</h3>
+						aria-hidden="true">&times;</button>
+					<h3 id="modalTitle">Edit or Delete 'Product'</h3>
 				</div>
-				<div class="modal-body">
-					<p>
-						Use backing Bean property here...
-						<h:outputText value="#{employeeController.employee.name}" />
-					</p>
-				</div>
-				<div class="modal-footer">
-					<button class="btn" data-dismiss="modal" aria-hidden="true">Close</button>
-					<button class="btn btn-primary">Save changes</button>
-				</div>
+				<div class="modal-body" id="modalBody">
 
-			</div>
 
+				
+				<div class="bs-example"> <br/>
+					<div class="alert-success">
+						<a href="#" class="close" data-dismiss="alert">&times;</a> <strong>Error!</strong>
+							A problem has been occurred while submitting your data.
+					</div>
+				</div>
+				
+				</div>
+				<div class="modal-footer"></div>
+			</div> <!-- /.modal-content -->
+		</div> <!-- /.modal-dialog -->
+		</h:form>
+	</div> <!-- /.modal -->
 
 
 		</ui:define>
 	</ui:composition>
 
-
+			
+			
 	<script type="text/javascript">
-    function openModal(modalName) {
-       $(modalName).modal('show');
-       return false;
-    }
+	$(document).ready(function() {
+		function openModal(modalName) {
+		       $(modalName).modal('show');
+		       //return false;
+		}
+	}
+    
 </script>
 
 
-</body>
+</h:body>
 </html>
